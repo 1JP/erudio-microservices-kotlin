@@ -1,6 +1,5 @@
 package br.com.erudio
 
-import br.com.erudio.exceptions.ExceptionResponse
 import br.com.erudio.exceptions.UnsupportedMathOperationException
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,6 +18,50 @@ class MathController {
         if(!isNumeric(numberOne) || !isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value = ["/sub/{numberOne}/{numberTwo}"])
+    fun sub(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value = ["/mult/{numberOne}/{numberTwo}"])
+    fun mult(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value = ["/division/{numberOne}/{numberTwo}"])
+        fun division(@PathVariable(value="numberOne") numberOne: String?,
+                     @PathVariable(value="numberTwo") numberTwo: String?
+        ): Double {
+            if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+                throw UnsupportedMathOperationException("Please set a numeric value!")
+            return convertToDouble(numberOne) / convertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value = ["/min/{numberOne}/{numberTwo}"])
+    fun min(@PathVariable(value="numberOne") numberOne: String?,
+            @PathVariable(value="numberTwo") numberTwo: String?
+    ): Double {
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+    }
+
+    @RequestMapping(value = ["/square/{numberOne}"])
+    fun square(@PathVariable(value="numberOne") numberOne: String?
+    ): Double {
+        if(!isNumeric(numberOne))
+            throw UnsupportedMathOperationException("Please set a numeric value!")
+        return Math.sqrt(convertToDouble(numberOne));
     }
 
     private fun convertToDouble(strNumber: String?): Double {
