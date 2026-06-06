@@ -1,6 +1,6 @@
 package br.com.erudio.controller
 
-import br.com.erudio.exceptions.UnsupportedMathOperationException
+import br.com.erudio.exceptions.ResourceNotFoundException
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -17,7 +17,7 @@ class MathController {
             @PathVariable(value="numberTwo") numberTwo: String?
     ): Double {
         if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please set a numeric value!")
+            throw ResourceNotFoundException("Please set a numeric value!")
         return math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
@@ -26,7 +26,7 @@ class MathController {
             @PathVariable(value="numberTwo") numberTwo: String?
     ): Double {
         if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please set a numeric value!")
+            throw ResourceNotFoundException("Please set a numeric value!")
         return math.subtraction(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
@@ -35,7 +35,7 @@ class MathController {
              @PathVariable(value="numberTwo") numberTwo: String?
     ): Double {
         if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please set a numeric value!")
+            throw ResourceNotFoundException("Please set a numeric value!")
         return math.multiplication(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
@@ -44,7 +44,7 @@ class MathController {
                      @PathVariable(value="numberTwo") numberTwo: String?
         ): Double {
             if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-                throw UnsupportedMathOperationException("Please set a numeric value!")
+                throw ResourceNotFoundException("Please set a numeric value!")
             return math.division(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
@@ -53,7 +53,7 @@ class MathController {
             @PathVariable(value="numberTwo") numberTwo: String?
     ): Double {
         if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo))
-            throw UnsupportedMathOperationException("Please set a numeric value!")
+            throw ResourceNotFoundException("Please set a numeric value!")
         return math.mean(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
     }
 
@@ -61,7 +61,7 @@ class MathController {
     fun square(@PathVariable(value="numberOne") numberOne: String?
     ): Double {
         if(!NumberConverter.isNumeric(numberOne))
-            throw UnsupportedMathOperationException("Please set a numeric value!")
+            throw ResourceNotFoundException("Please set a numeric value!")
         return math.squareRoot(NumberConverter.convertToDouble(numberOne));
     }
 
